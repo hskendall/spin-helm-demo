@@ -7,11 +7,11 @@ environment: dev
 demo: false
 
 image:
-  name: spin-helm-demo
+  name: index.docker.io/awsnerd/spin-helm-demo
   pullPolicy: IfNotPresent
 
 service:
-  type: LoadBalancer
+  type: NodePort
   port: 3000
 
 ingress:
