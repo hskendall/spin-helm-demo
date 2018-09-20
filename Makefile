@@ -5,7 +5,7 @@ APP_VERSION ?= $(shell cat chart/spin-helm-demo/Chart.yaml | yq -r .appVersion)
 
 CHART_BUCKET ?= spin-helm-demo-bucket-piyali
 DOCKER_REPO ?= awsnerd/spin-helm-demo
-SPINNAKER_API ?= https://my-spinnaker.io
+SPINNAKER_API ?= http://localhost:9000
 
 docker:
 	docker build -t $(DOCKER_REPO):$(APP_VERSION) .
@@ -26,11 +26,11 @@ upload:
 triggerdocker:
 	curl -L -vvv -X POST \
 		-k \
-		-H"Content-Type: application/json" $(SPINNAKER_API)/webhooks/webhook/spinhelmdemo \
+		-H"Content-Type: application/json" $(SPINNAKER_API)/gate/webhooks/webhook/spinnakerhelmdemo \
 		-d '{"artifacts": [{"type": "docker/image", "name": "$(CHART_NAME)", "reference": "$(DOCKER_REPO):$(APP_VERSION)", "kind": "docker"}]}'
 
 triggerchart:
 	curl -L -vvv -X POST \
 		-k \
-		-H"Content-Type: application/json" $(SPINNAKER_API)/webhooks/webhook/spinhelmdemo \
-		-d '{"artifacts": [{"type": "s3/object", "name": "s3://$(CHART_BUCKET)/packages/spin-helm-demo-0.1.0.tgz", "reference": "s3://$(CHART_BUCKET)/packages/spin-helm-demo-$(CHART_VERSION).tgz", "kind": "s3"}]}'
+		-H"Content-Type: application/json" $(SPINNAKER_API)/gate/webhooks/webhook/spinnakerhelmdemo \
+		-d '{"artifacts": [{"type": "s3/object", "name": "s3://$(CHART_BUCKET)/packages/spin-helm-demo-$(CHART_VERSION).tgz", "reference": "s3://$(CHART_BUCKET)/packages/spin-helm-demo-$(CHART_VERSION).tgz", "kind": "s3"}]}'
