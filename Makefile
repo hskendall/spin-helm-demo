@@ -3,8 +3,8 @@ CHART_VERSION=$(shell cat chart/spin-helm-demo/Chart.yaml | yq -r .version)
 
 APP_VERSION ?= $(shell cat chart/spin-helm-demo/Chart.yaml | yq -r .appVersion)
 
-CHART_BUCKET ?= spin-helm-demo-bucket
-DOCKER_REPO ?= spin-helm-repo
+CHART_BUCKET ?= spin-helm-demo-bucket-piyali
+DOCKER_REPO ?= awsnerd/spin-helm-demo
 SPINNAKER_API ?= https://my-spinnaker.io
 
 docker:
