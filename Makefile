@@ -32,8 +32,8 @@ triggerdocker:
 triggerchartviagithub:
 	curl -L -vvv -X POST \
 	 -k \ 
-	 -H "content-type: application/json" $(SPINNAKER_API)/gate/webhooks/webhook/sample \ 
-	-d '{"artifacts":[{"type":"github/file","name":"spin-helm-demo-$(CHART_VERSION).tgz","reference":"https://api.github.com/repos/pkamra/spin-helm-demo/contents/spin-helm-demo-$(CHART_VERSION).tgz","kind":"github"}]}'
+	 -H"content-type: application/json" http://localhost:9000/gate/webhooks/webhook/sample \ 
+	 -d '{"artifacts":[{"type":"github/file","name":"spin-helm-demo-$(CHART_VERSION).tgz","reference":"https://api.github.com/repos/pkamra/spin-helm-demo/contents/spin-helm-demo-$(CHART_VERSION).tgz","kind":"github"}]}'
 
 triggerchartvias3:
 	curl -L -vvv -X POST \
