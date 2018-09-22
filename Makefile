@@ -26,7 +26,7 @@ upload:
 triggerdocker:
 	curl -L -vvv -X POST \
 		-k \
-		-H"Content-Type: application/json" $(SPINNAKER_API)/gate/webhooks/webhook/spinnakerhelmdemo \
+		-H"Content-Type: application/json" http://localhost:9000/gate/webhooks/webhook/sample \
 		-d '{"artifacts": [{"type": "docker/image", "name": "$(CHART_NAME)", "reference": "$(DOCKER_REPO):$(APP_VERSION)", "kind": "docker"}]}'
 
 triggerchartviagithub:
